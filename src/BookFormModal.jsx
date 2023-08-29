@@ -25,50 +25,39 @@ class BookFormModal extends React.Component {
           description: description.value,
           status: status.value,
         });
+        this.props.handleModal();
     }
+
     render () {
         let {show} = this.props;
 
         return (
-            <div>
-            {show  ? (
-            <div
-            className="modal show"
-            style={{ display: 'block', position: 'initial' }}
-          >
-            <Modal show={this.props.show} onHide={this.props.handleModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Add Book</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-              <Form >
-      <Form.Group className="mb-3" controlId="title">
-        <Form.Label>Book Title</Form.Label>
-        <input type="text" placeholder="Enter book title" />
-      </Form.Group>
+      <Modal show={show} onHide={this.props.handleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Book</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Book Title</Form.Label>
+              <Form.Control type="text" name="title" placeholder="Enter book title" />
+            </Form.Group>
 
-      <Form.Group className="mb-3" controlId="description">
-        <Form.Label>Book Description</Form.Label>
-        <input type="text" placeholder="Enter book description" />
-      </Form.Group>
-     
-      <Form.Group className="mb-3" controlId="status">
-        <Form.Label>Book Status</Form.Label>
-        <input type="text" placeholder="PassEnter book statusword" />
-      </Form.Group>
-    </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary" onSubmit={this.handleSubmit} onClick={() => this.props.handleModal()}>Save changes</Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
-            ) : (
-                null
-            )
-            }
-            </div>
+            <Form.Group className="mb-3">
+              <Form.Label>Book Description</Form.Label>
+              <Form.Control type="text" name="description" placeholder="Enter book description" />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Book Status</Form.Label>
+              <Form.Control type="text" name="status" placeholder="Enter book status" />
+            </Form.Group>
+
+            <Button variant="secondary" onClick={this.props.handleModal}>Close</Button>
+            <Button variant="primary" type="submit">Save changes</Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
         )
     }
 }
