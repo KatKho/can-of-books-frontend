@@ -19,7 +19,7 @@ class BestBooks extends React.Component {
     axios.get(`${SERVER_URL}/books`)
     .then(response => {
       this.setState({books: response.data});
-      console.log(this.state.books);
+      console.log(response.data);
     });
   }
 
@@ -35,7 +35,7 @@ class BestBooks extends React.Component {
         {this.state.books.length ? (
           this.state.books.map((book, index) => {
       return <Carousel.Item key={index}>
-        <img src='https://placehold.co/1440x660' />
+        <img style={{width: '1440px'}} src='public/bookshelf.png' />
         <Carousel.Caption>
             <p>{book.title}</p>
             <p>{book.description}</p>
