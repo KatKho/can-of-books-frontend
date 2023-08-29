@@ -35,7 +35,7 @@ class BestBooks extends React.Component {
         {this.state.books.length ? (
           this.state.books.map((book, index) => {
       return <Carousel.Item key={index}>
-        <img style={{width: '1440px'}} src='public/bookshelf.png' />
+        <img src='https://placehold.co/1440x660' />
         <Carousel.Caption>
             <p>{book.title}</p>
             <p>{book.description}</p>
