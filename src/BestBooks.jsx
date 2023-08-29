@@ -1,16 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
+import BookFormModal from './BookFormModal';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
-  ? import.meta.env.VITE_SERVER_URL.slice(0, -1)  // Remove trailing slash if present
-  : import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      bookForm: false,
     }
   }
 
@@ -23,6 +24,18 @@ class BestBooks extends React.Component {
     });
   }
 
+  handleModal = () => {
+    this.setState({
+      bookForm: !this.state.bookForm,
+    });
+    console.log(this.state.bookForm);
+  };
+
+  addNewBook = (book) => {
+    this.setState({
+      books: [...this.state.books, book] })
+  }
+
   render() {
 
     /* TODO: render all the books in a Carousel */
@@ -30,7 +43,14 @@ class BestBooks extends React.Component {
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+        <BookFormModal show={this.state.bookForm} addNewBook={this.addNewBook}  handleModal={this.handleModal} />
+        <Button onClick={this.handleModal}
+            variant="primary"
+            type="submit"
+            style={{ marginTop: '10px', marginBottom: '10px', backgroundColor: 'black' }}
+          >
+            Add Book!
+          </Button>
           <Carousel>
         {this.state.books.length ? (
           this.state.books.map((book, index) => {
@@ -46,6 +66,7 @@ class BestBooks extends React.Component {
           ) : (
             <h3>No Books Found :(</h3>
             )}
+          
             </Carousel>
       </>
     )
