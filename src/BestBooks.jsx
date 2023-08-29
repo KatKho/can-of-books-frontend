@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 
-//test 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 class BestBooks extends React.Component {
@@ -33,8 +32,8 @@ class BestBooks extends React.Component {
           <Carousel>
         {this.state.books.length ? (
           this.state.books.map((book, index) => {
-      return <Carousel.Item  key={index}>
-        <img style={{}} src='https://placehold.co/1200x400' />
+      return <Carousel.Item key={index}>
+        <img src='https://placehold.co/1440x660' />
         <Carousel.Caption>
             <p>{book.title}</p>
             <p>{book.description}</p>
