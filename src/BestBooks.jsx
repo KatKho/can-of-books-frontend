@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
+  ? import.meta.env.VITE_SERVER_URL.slice(0, -1)  // Remove trailing slash if present
+  : import.meta.env.VITE_SERVER_URL;
 
 class BestBooks extends React.Component {
   constructor(props) {
