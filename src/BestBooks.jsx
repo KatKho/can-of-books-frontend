@@ -12,14 +12,22 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       bookForm: false,
-    }
+    };
   }
 
+  handleDelete = async (id) => {
+    await axios.delete(`${SERVER_URL}/books/${id}`);
+    this.setState({
+      book: this.state.book.filter((book) => {
+        return book._id !== id;
+      }),
+    });
+  };
+
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
-  componentDidMount () {
-    axios.get(`${SERVER_URL}/books`)
-    .then(response => {
-      this.setState({books: response.data});
+  componentDidMount() {
+    axios.get(`${SERVER_URL}/books`).then((response) => {
+      this.setState({ books: response.data });
       console.log(response.data);
     });
   }
@@ -33,43 +41,59 @@ class BestBooks extends React.Component {
 
   addNewBook = (book) => {
     this.setState({
-      books: [...this.state.books, book] })
-  }
+      books: [...this.state.books, book],
+    });
+  };
 
   render() {
-
     /* TODO: render all the books in a Carousel */
 
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        <BookFormModal show={this.state.bookForm} addNewBook={this.addNewBook}  handleModal={this.handleModal} />
-        <Button onClick={this.handleModal}
-            variant="primary"
-            type="submit"
-            style={{ marginTop: '10px', marginBottom: '10px', backgroundColor: 'black' }}
-          >
-            Add Book!
-          </Button>
-          <Carousel>
-        {this.state.books.length ? (
-          this.state.books.map((book, index) => {
-      return <Carousel.Item key={index}>
-        <img src='https://placehold.co/1440x660' />
-        <Carousel.Caption>
-            <p>{book.title}</p>
-            <p>{book.description}</p>
-            <p>{book.status}</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-          })
+        <BookFormModal
+          show={this.state.bookForm}
+          addNewBook={this.addNewBook}
+          handleModal={this.handleModal}
+        />
+        <Button
+          onClick={this.handleModal}
+          variant="primary"
+          type="submit"
+          style={{
+            marginTop: '10px',
+            marginBottom: '10px',
+            backgroundColor: 'black',
+          }}
+        >
+          Add Book!
+        </Button>
+        <Carousel>
+          {this.state.books.length ? (
+            this.state.books.map((book, index) => {
+              return (
+                <Carousel.Item key={index}>
+                  <img src="https://placehold.co/1440x660" />
+                  <Carousel.Caption>
+                    <p>{book.title}</p>
+                    <p>{book.description}</p>
+                    <p>{book.status}</p>
+                    <Button
+                      variant="warning"
+                      onClick={() => this.handleDelete(book._id)}
+                    >
+                      Delete
+                    </Button>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );
+            })
           ) : (
             <h3>No Books Found :(</h3>
-            )}
-          
-            </Carousel>
+          )}
+        </Carousel>
       </>
-    )
+    );
   }
 }
 

@@ -7,31 +7,31 @@ import axios from 'axios';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 class BookFormModal extends React.Component {
-    constructor (props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    handleCreate = async (book) => {
-        let response = await axios.post(`${SERVER_URL}/books`, book); 
-        this.props.addNewBook(response.data)
-        console.log(response.data);
-      }
-      
-    handleSubmit = (e) => {
-        e.preventDefault();
-        let { title, description, status } = e.target;
-        this.handleCreate({
-          title: title.value,
-          description: description.value,
-          status: status.value,
-        });
-        this.props.handleModal();
-    }
+  handleCreate = async (book) => {
+    let response = await axios.post(`${SERVER_URL}/books`, book);
+    this.props.addNewBook(response.data);
+    console.log(response.data);
+  };
 
-    render () {
-        let {show} = this.props;
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let { title, description, status } = e.target;
+    this.handleCreate({
+      title: title.value,
+      description: description.value,
+      status: status.value,
+    });
+    this.props.handleModal();
+  };
 
-        return (
+  render() {
+    let { show } = this.props;
+
+    return (
       <Modal show={show} onHide={this.props.handleModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Book</Modal.Title>
@@ -40,26 +40,42 @@ class BookFormModal extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Book Title</Form.Label>
-              <Form.Control type="text" name="title" placeholder="Enter book title" />
+              <Form.Control
+                type="text"
+                name="title"
+                placeholder="Enter book title"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Book Description</Form.Label>
-              <Form.Control type="text" name="description" placeholder="Enter book description" />
+              <Form.Control
+                type="text"
+                name="description"
+                placeholder="Enter book description"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Book Status</Form.Label>
-              <Form.Control type="text" name="status" placeholder="Enter book status" />
+              <Form.Control
+                type="text"
+                name="status"
+                placeholder="Enter book status"
+              />
             </Form.Group>
 
-            <Button variant="secondary" onClick={this.props.handleModal}>Close</Button>
-            <Button variant="primary" type="submit">Save changes</Button>
+            <Button variant="secondary" onClick={this.props.handleModal}>
+              Close
+            </Button>
+            <Button variant="primary" type="submit">
+              Save changes
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>
-        )
-    }
+    );
+  }
 }
 
 export default BookFormModal;
