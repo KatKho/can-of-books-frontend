@@ -2,53 +2,50 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
+// import axios from 'axios';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
-  ? import.meta.env.VITE_SERVER_URL.slice(0, -1)  
-  : import.meta.env.VITE_SERVER_URL;
+// const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
+//   ? import.meta.env.VITE_SERVER_URL.slice(0, -1)  
+//   : import.meta.env.VITE_SERVER_URL;
 
-class BookFormModal extends React.Component {
+class BookFormModalUpdate extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  handleCreate = async (book) => {
-    try {
-      let response = await axios.post(`${SERVER_URL}/books`, book);
-      this.props.addNewBook(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error creating book:", error);
-    }
-  };
-
-  handleSubmit = (e) => {
+  handleSubmitUpdate = (e) => {
     e.preventDefault();
     let { title, description, status } = e.target;
-    this.handleCreate({
-      title: title.value,
-      description: description.value,
-      status: status.value,
-    });
-    this.props.handleModal();
+  
+    if (this.props.bookToUpdate) {
+      const updatedBook = {
+        _id: this.props.bookToUpdate._id,
+        title: title.value,
+        description: description.value,
+        status: status.value,
+      };
+  
+      this.props.handleUpdate(updatedBook);
+      this.props.handleSubmitModal();
+    }
   };
 
   render() {
     let { show } = this.props;
 
     return (
-      <Modal show={show} onHide={this.props.handleModal}>
+      <Modal show={show} onHide={this.props.handleSubmitModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Book</Modal.Title>
+          <Modal.Title>Update Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmitUpdate}>
             <Form.Group className="mb-3">
               <Form.Label>Book Title</Form.Label>
               <Form.Control
                 type="text"
                 name="title"
+                id='title'
                 placeholder="Enter book title"
               />
             </Form.Group>
@@ -71,7 +68,7 @@ class BookFormModal extends React.Component {
               />
             </Form.Group>
 
-            <Button variant="secondary" onClick={this.props.handleModal}>
+            <Button variant="secondary" onClick={this.props.handleSubmitModal}>
               Close
             </Button>
             <Button variant="primary" type="submit">
@@ -84,4 +81,4 @@ class BookFormModal extends React.Component {
   }
 }
 
-export default BookFormModal;
+export default BookFormModalUpdate;
