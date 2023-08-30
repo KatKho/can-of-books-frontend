@@ -4,7 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
+  ? import.meta.env.VITE_SERVER_URL.slice(0, -1)  
+  : import.meta.env.VITE_SERVER_URL;
 
 class BookFormModal extends React.Component {
   constructor(props) {

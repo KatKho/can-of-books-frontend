@@ -1,0 +1,45 @@
+
+.best-books-container {
+    background-color: #f4f0ea; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+
+  .library-title {
+    font-family: 'Cinzel Decorative';
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+ 
+  }
+
+  .carousel-caption {
+    background-color: rgba(255, 255, 255, 0.489); 
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+
+  .btn-warning {
+    background-color: #a6430e; 
+    border: none;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+
+  .button {
+    display: block;
+    margin: 0 auto; 
+    background-color: #57241e;
+    border: none;
+  }

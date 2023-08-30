@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 class Profile extends Component {
 
   render() {
-    /* TODO: render information about the developers */
+
     return (
   <>
     <Card>

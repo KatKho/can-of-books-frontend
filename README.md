@@ -37,10 +37,22 @@ Finish time: 7:20pm
 
 Actual time needed to complete: 4 hrs
 
+Name of feature: CRUD
+
+Estimate of time needed to complete: 4hrs
+
+Start time: 2:00pm
+
+Finish time: 5:50pm
+
+Actual time needed to complete: 4 hrs
+
 ## Credit and Collaborations
 
 ### Logistical
+
 What hours will you be available to communicate?
+
 - 9am - 6pm
 What platform will you use to communicate (ie. Slack, phone …)?
 - Slack, Discord
@@ -50,7 +62,9 @@ What is your plan if you start to fall behind?
 - Ask for help, increase time of availability
 
 ### Cooperative
+
 Make a list of each parson’s strengths.
+
 - Josh - Backend
 - Kat - Bootstrap
 How can you best utilize these strengths in the development of your application?
@@ -64,8 +78,10 @@ Knowing that every person in your team needs to understand the code, how do you 
 ### Conflict Resolution
 
 What will your team do if one person is pulling all the weight while the other person is not contributing?
+
 - Communicate and assign new responsibilities
 What will your team do if one person is taking over the project and not letting the other member contribute?
 - Communicate and assign new responsibilities
 How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?
 - Communication is the key
+  
