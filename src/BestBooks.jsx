@@ -4,7 +4,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
+  ? import.meta.env.VITE_SERVER_URL.slice(0, -1) 
+  : import.meta.env.VITE_SERVER_URL;
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -24,7 +26,6 @@ class BestBooks extends React.Component {
     });
   };
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
   componentDidMount() {
     axios.get(`${SERVER_URL}/books`).then((response) => {
       this.setState({ books: response.data });
@@ -46,24 +47,22 @@ class BestBooks extends React.Component {
   };
 
   render() {
-    /* TODO: render all the books in a Carousel */
 
     return (
-      <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+      <div className="best-books-container">
+        <h2 className="library-title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <BookFormModal
           show={this.state.bookForm}
           addNewBook={this.addNewBook}
           handleModal={this.handleModal}
         />
-        <Button
+        <Button  className="button" 
           onClick={this.handleModal}
           variant="primary"
           type="submit"
           style={{
             marginTop: '10px',
             marginBottom: '10px',
-            backgroundColor: 'black',
           }}
         >
           Add Book!
@@ -73,8 +72,8 @@ class BestBooks extends React.Component {
             this.state.books.map((book, index) => {
               return (
                 <Carousel.Item key={index}>
-                  <img src="https://placehold.co/1440x660" />
-                  <Carousel.Caption>
+                  <img src="src/assests/bookshelf.png" />
+                  <Carousel.Caption style={{color: 'black'}}>
                     <p>{book.title}</p>
                     <p>{book.description}</p>
                     <p>{book.status}</p>
@@ -92,7 +91,7 @@ class BestBooks extends React.Component {
             <h3>No Books Found :(</h3>
           )}
         </Carousel>
-      </>
+      </div>
     );
   }
 }
