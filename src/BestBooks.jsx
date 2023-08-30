@@ -3,6 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal'; 
+import bookshelfImage from "./bookshelf.png";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
   ? import.meta.env.VITE_SERVER_URL.slice(0, -1) 
@@ -72,7 +73,7 @@ class BestBooks extends React.Component {
             this.state.books.map((book, index) => {
               return (
                 <Carousel.Item key={index}>
-                  <img src="./assests/bookshelf.png" />
+                  <img src={bookshelfImage} alt="Bookshelf" />
                   <Carousel.Caption style={{color: 'black'}}>
                     <p>{book.title}</p>
                     <p>{book.description}</p>
