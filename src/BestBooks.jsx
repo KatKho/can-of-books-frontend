@@ -121,7 +121,7 @@ class BestBooks extends React.Component {
                       Delete
                     </Button>
                     <Button
-                      variant="info"
+                      variant="secondary"
                       onClick={() => {
                       this.setState({ bookToUpdate: book }); 
                       this.handleSubmitModal(book);

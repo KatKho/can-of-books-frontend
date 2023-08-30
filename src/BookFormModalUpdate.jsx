@@ -45,6 +45,7 @@ class BookFormModalUpdate extends React.Component {
               <Form.Control
                 type="text"
                 name="title"
+                id='title'
                 placeholder="Enter book title"
               />
             </Form.Group>
