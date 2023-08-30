@@ -47,6 +47,16 @@ Finish time: 5:50pm
 
 Actual time needed to complete: 4 hrs
 
+Name of feature: PUT
+
+Estimate of time needed to complete: 3hrs
+
+Start time: 1:30pm
+
+Finish time:
+
+Actual time needed to complete: 
+
 ## Credit and Collaborations
 
 ### Logistical

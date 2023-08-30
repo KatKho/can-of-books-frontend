@@ -3,6 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal'; 
+import BookFormModalUpdate from './BookFormModalUpdate'; 
 import bookshelfImage from "./bookshelf.png";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
@@ -14,9 +15,32 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      bookForm: false,
+      createBook: false,
+      updateBook: false,
+
     };
   }
+
+  handleUpdate = async (updatedBook) => {
+    try {
+      let response = await axios.put(`${SERVER_URL}/books/${updatedBook._id}`, updatedBook);
+      let updatedBookData = response.data;
+  
+      const updatedBooks = this.state.books.map((book) => {
+        if (book._id === updatedBookData._id) {
+          return updatedBookData;
+        } else {
+          return book;
+        }
+      });
+  
+      this.setState({
+        books: updatedBooks,
+      });
+    } catch (error) {
+      console.error("Error updating book:", error);
+    }
+  };
 
   handleDelete = async (id) => {
     await axios.delete(`${SERVER_URL}/books/${id}`);
@@ -36,10 +60,16 @@ class BestBooks extends React.Component {
 
   handleModal = () => {
     this.setState({
-      bookForm: !this.state.bookForm,
-    });
-    console.log(this.state.bookForm);
+      createBook: !this.state.createBook,
+    }) 
   };
+
+  handleSubmitModal = () => {
+    this.setState({
+      updateBook: !this.state.updateBook,
+    }) 
+  };
+
 
   addNewBook = (book) => {
     this.setState({
@@ -53,9 +83,15 @@ class BestBooks extends React.Component {
       <div className="best-books-container">
         <h2 className="library-title">My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <BookFormModal
-          show={this.state.bookForm}
+          show={this.state.createBook}
           addNewBook={this.addNewBook}
           handleModal={this.handleModal}
+        />
+        <BookFormModalUpdate
+            show={this.state.updateBook}
+            bookToUpdate={this.state.bookToUpdate} 
+            handleUpdate={this.handleUpdate} 
+            handleSubmitModal={this.handleSubmitModal}
         />
         <Button  className="button" 
           onClick={this.handleModal}
@@ -84,6 +120,15 @@ class BestBooks extends React.Component {
                     >
                       Delete
                     </Button>
+                    <Button
+                      variant="info"
+                      onClick={() => {
+                      this.setState({ bookToUpdate: book }); 
+                      this.handleSubmitModal(book);
+                      }}
+                        >
+                     Update
+                  </Button>
                   </Carousel.Caption>
                 </Carousel.Item>
               );
