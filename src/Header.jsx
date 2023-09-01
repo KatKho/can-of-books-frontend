@@ -9,6 +9,8 @@ class Header extends React.Component {
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
         <NavItem style={{color: 'white'}}><Link to="/" className="nav-link">Home</Link></NavItem>
         <NavItem style={{color: 'white'}}><Link to="/About" className="nav-link">About</Link></NavItem>
+        <NavItem style={{color: 'white'}}><Link to="/Profile" className="nav-link">Profile</Link></NavItem>
+        {this.props.children}
       </Navbar>
     )
   }

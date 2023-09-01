@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal'; 
 import BookFormModalUpdate from './BookFormModalUpdate'; 
 import bookshelfImage from "./bookshelf.png";
+import { withAuth0 } from '@auth0/auth0-react';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL.endsWith('/')
   ? import.meta.env.VITE_SERVER_URL.slice(0, -1) 
@@ -17,7 +18,7 @@ class BestBooks extends React.Component {
       books: [],
       createBook: false,
       updateBook: false,
-
+      token: null,
     };
   }
 
@@ -51,8 +52,22 @@ class BestBooks extends React.Component {
     });
   };
 
-  componentDidMount() {
-    axios.get(`${SERVER_URL}/books`).then((response) => {
+  async componentDidMount() {
+    let res = await this.props.auth0.getIdTokenClaims();
+    const token = res.__raw;
+    console.log('OUR WEB TOKEN', token);
+    this.setState({ token });
+
+    const config = {
+      headers: {
+          "Authorization": `Bearer ${token}`
+      },
+      method: 'GET',
+      baseURL: SERVER_URL,
+      url: '/books'
+    }
+
+    axios(config).then((response) => {
       this.setState({ books: response.data });
       console.log(response.data);
     });
@@ -142,4 +157,5 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+const AuthBooks = withAuth0(BestBooks);
+export default AuthBooks;
