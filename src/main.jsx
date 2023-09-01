@@ -4,7 +4,7 @@ import App from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
 const VITE_AUTH_DOMAIN = import.meta.env.VITE_AUTH_DOMAIN
 const VITE_AUTH_CLIENT_ID = import.meta.env.VITE_AUTH_CLIENT_ID
-
+const VITE_AUTH_REDIRECT_URI = import.meta.env.VITE_AUTH_REDIRECT_URI
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -12,7 +12,7 @@ root.render(
     domain={VITE_AUTH_DOMAIN}
     clientId={VITE_AUTH_CLIENT_ID}
     authorizationParams={{
-      redirect_uri: window.location.origin,
+      redirect_uri: VITE_AUTH_REDIRECT_URI,
     }}>
     <App />
     </Auth0Provider>
